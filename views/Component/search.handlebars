@@ -1,0 +1,82 @@
+<nav style="background-color:#000; z-index: 9999">
+        <div class="left">
+                <a href="../homepage"><img id="logo" src="../../public/assets/logo200.png" alt="Logo" style=""></a>
+                <form action="/book/search" method="GET">
+                        <div class="form-group has-feedback has-search" style="margin-bottom:0px">
+                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                <label for="keyword" style="display:none;"></label>
+                                 <input type="search" id="keyword" name="keyword" class="form-control" placeholder="Search">
+                        </div>
+                </form>
+        </div>
+
+        <div class="right">
+                <ul>
+                        <li class="cart">
+                                <span id="cart">{{cartTotal}}</span><a href="/user/cart/{{userid}}">Cart</a>
+                                {{!-- <ul class="dropdown">
+                                        <li id="current-cart"></li>
+                                </ul> --}}
+                        </li>
+                        <li>
+                                <a href=""><span id="username">Hi {{firstName}}</span>Account</a>
+                                <ul class="dropdown">
+                                        <li><a href="/user/dashboard">My account</a></li>
+                                        
+                                         <li><a href="../../../" onclick="delete_cookie()">Log out</a></li>
+                                </ul>
+                        </li>
+
+                </ul>
+        </div>
+</nav>
+<div class="store">
+     {{#if noErrors }}
+    <div class="search-header">
+        Totally <strong>{{number}} </strong>result about <strong>{{keyword}}</strong>
+    </div>
+    <div class="container">
+        <div class="book-wrap">
+            {{#each books}}  
+                <div class="book">
+                    <a href="/book/{{_id}}"><img src="{{bookImage}}" alt="searchimage"></a>
+                    <ul>
+                        <li class="search-book-title">{{bookName}}</li>
+                        <li style="color:#767676" class="search-book-author">{{bookAuthor}}</li>
+                        <li class="search-book-price">$ {{bookPrice}}</li>
+                        <li class="search-book-button">
+                            <a class="readmore" href="/book/{{_id}}">
+                              
+                                
+                                    <p style="color:#fff; margin: 0; font-size:.8em;">Read More</p>      
+                            
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+     {{/if}}
+     {{#if hasErrors }}
+      <div class="search-header" style="color:rgb(219, 0, 0)">
+          {{ error }}
+    </div>
+           
+    {{/if}}
+   
+
+
+</div>
+
+<script>
+
+    function delete_cookie() {
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "userid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        alert('You have been logged out!')
+        window.location = "../../../";
+        
+    }
+  
+</script>

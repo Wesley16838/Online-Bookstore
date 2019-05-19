@@ -1,0 +1,101 @@
+<nav style="background-color:#000; z-index: 9999">
+        <div class="left">
+                <a href="../homepage"><img id="logo" src="../../public/assets/logo200.png" alt="Logo" style=""></a>
+                <form action="/book/search" method="GET">
+                        <div class="form-group has-feedback has-search" style="margin-bottom:0px">
+                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                <label for="keyword" style="display:none;"></label>
+                                <input type="search" id="keyword" name="keyword" class="form-control" placeholder="Search">
+                        </div>
+                </form>
+        </div>
+
+        <div class="right">
+                <ul>
+                        <li class="cart">
+                                <span id="cart">{{cartTotal}}</span><a href="/user/cart/{{userid}}">Cart</a>
+                                {{!-- <ul class="dropdown">
+                                        <li id="current-cart"></li>
+                                </ul> --}}
+                        </li>
+                        <li>
+                                <a href=""><span id="username">Hi {{firstName}}</span>Account</a>
+                                <ul class="dropdown">
+                                        <li><a href="/user/dashboard">My account</a></li>
+                                        
+                                         <li><a href="../../../" onclick="delete_cookie()">Log out</a></li>
+                                </ul>
+                        </li>
+
+                </ul>
+        </div>
+</nav>
+<div class="container" style="padding-top:180px">
+        <div class="left-book">
+                <img src="{{book.bookImage}}" alt="">
+                <p style="font-size:.8em; margin:1em 0em;">$<span style="color:#008486" id="price">{{book.bookPrice}}</span></p>
+                <form action="../user/cart/add/?bookId={{book._id}}" method="POST" style="display: inline-block;">
+                        <p class="item-title" style="font-size:1em; margin-bottom: 1em;">Quantity</p>
+                        <label for="quantity" style="font-weight: normal;display: none;"></label>            
+                        <input type="number" onchange="myFunction()" id="quantity" name="quantity" min="1" max="10" value="1" style="width: 30%; margin-bottom: 1em;">
+                        <p style="font-size:.8em">Total:<span id="demo">{{book.bookPrice}}</span></p>
+                        <button class="cart-btn" type="submit">Add to Cart</button>
+                </form>
+                
+                {{!-- <a href="javascript:addshoppingcart('{{book._id}}')">Add to cart</a> --}}
+        </div>
+        <div class="right-book">
+                <div class="book-desc">
+                       <h1 style="font-weight: bold">{{book.bookName}} <span style="font-weight:500; color:#767676; margin-left:1em"> {{book.bookPublisher}} - {{date}}</span></h1>
+                       <p>Author</p><span>{{book.bookAuthor}}</span><br>
+                       
+                       <p>Language</p><span>{{book.bookLanguage}}</span><br>
+                       <p>ISBN</p><span>{{book.bookISBN}}</span><br>
+                       <p>Description</p><span>{{book.bookDescription}}</span>
+                </div>           
+        </div>
+</div>
+<!-- Footer -->
+<footer>
+
+  <!-- Copyright -->
+  
+   <div class="footer-body">
+      <div class="footer-heading">© 2018 Copyright: <span style="color:#fff;">BookTown</span></div> 
+    </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+<script>
+
+    function delete_cookie() {
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "userid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        alert('You have been logged out!')
+        window.location = "../../../";
+        
+    }
+    function addshoppingcart(bookid) {
+        // Create new request.
+        let xobj = new XMLHttpRequest();  
+        // Add datetime parameter to the URL to prevent browser caching.
+       
+        xobj.open('POST', '../user/cart/add/?bookId='+bookid);
+        xobj.onreadystatechange = function() {
+                // 4 == DONE, 200 == request was fulfilled.
+                if (xobj.readyState == 4 && xobj.status == "200") {
+                        alert('Add book successfully!')
+                }
+        }
+        xobj.send(null);
+    }
+function myFunction() {
+  var x = document.getElementById("quantity").value;
+  var y = document.getElementById("price").innerText;
+ 
+  document.getElementById("demo").innerHTML =  (x * y).toFixed(2);
+}
+    
+
+</script>

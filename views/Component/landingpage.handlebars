@@ -1,0 +1,106 @@
+<script src="/public/js/fullpage.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<nav >
+    <div class="left">
+        <a href="/"><img id="logo" src="../../public/assets/logo200.png" alt="Logo" style=""></a>
+    </div>
+
+    <div class="right">
+        <ul>
+            <li><a id="list" href="/user/login">LOG IN</a></li>
+        </ul>
+    </div>
+</nav>
+<div id="fullpage">
+	<div class="section" id="section0">
+	  <h1 id="title" style="display:none">{{title}}</h1>
+      <p class="title wow fadeIn">Unlimited Books,</p>
+      <p class="title wow fadeIn">Novels, and more.</p>
+		  <p class="subtitle wow fadeIn" data-wow-delay=".7s">Buy anywhere. Cancel anytime.</p>
+      <a class="btn_signup wow fadeIn" data-wow-delay=".7s" href="/user/signup">Sign up</a>
+	</div>
+	<div class="section" id="section1">
+        <section class="flex-center">
+            <p class="title wow fadeIn">Shopping Everywhere</p>
+            <p class="subtitle wow fadeIn">Enjoy shopping on your phone, tablet, laptop, and TV.</p>
+        </section>
+        <section class="flex-center">
+            <img class="wow fadeInUp" data-wow-delay=".5s" src="../../public/assets/responsive.png" alt="responsive design">
+        </section>
+       
+      
+	</div>
+	<div class="section" id="section2">
+		 <section class="flex-center">
+           <img class="wow fadeInUp" data-wow-delay=".5s" src="../../public/assets/ios.png" alt="ios app" style="width:13em">
+        </section>
+        <section class="flex-center">
+            <p class="title wow fadeIn">iOS App is coming soon</p>
+            <p class="subtitle wow fadeIn">More efficient, more powerful.</p>
+        </section>
+	</div>
+    <div class="section" id="section3">
+        <section class="flex-center">
+             <p class="title wow fadeIn">How many book types? </p>
+        </section>
+        <section class="flex-center wow fadeInUp">
+           <canvas id="myChart"></canvas>	
+        </section>
+	    
+	</div>
+</div>
+ <script src="../../public/js/wow.js"></script>
+
+<script>
+        new WOW().init();
+        var t = document.getElementById('title').innerHTML;
+        if(t == 'Landing Page'){
+            var myFullpage = new fullpage('#fullpage', {
+                scrollBar: true,
+                scrollingSpeed: 1000,
+                css3: false,
+                navigation: true,
+                navigationPosition: 'right',
+                navigationTooltips: ['Introduction', 'Responsive Design','iOS APP','Data visualization'],
+                licenseKey: 'FFC49D8D-9F8043A6-A9C5B62A-FD153528'
+            });
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'doughnut',
+
+                // The data for our dataset
+                data: {
+                    labels: ['E-Books', 'Used books', 'New Releases'],
+                    datasets: [{
+                        label: 'How many Books Type do we have?',
+                        backgroundColor: [
+                                            "#4dc3ff",
+                                            "#ff6666",
+                                            "#00cc99"
+                                        ],
+                       
+                        data: [5, 9, 6],
+                       
+                    }]
+                },
+
+                // Configuration options go here
+                options: {
+                    legend: {
+                        labels: {
+                            // This more specific font property overrides the global property
+                            fontColor: '#fff'
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Books Type',
+                         fontColor: '#fff'
+                    }
+                }
+            });
+        }
+       
+</script>
+  

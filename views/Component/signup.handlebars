@@ -1,0 +1,74 @@
+<section class="signup half">
+        <header style="border-bottom: none; text-align: center;">
+            <a href="/"><img class="wow fadeIn" data-wow-delay=".5s" id="logo1" src="../../public/assets/logo_bk200.jpg" alt="Logo" style="width:5em"></a>
+            <h1 class="wow fadeIn" data-wow-delay=".5s">Smart choice! Welcome to join Booktown!</h1>
+        </header>  
+</section>
+<section class="half signup-form">
+    <div class="form-container wow fadeIn" data-wow-delay="1s" >
+     <div class="signup-topic">
+            <a href="/"><img class="wow fadeIn" data-wow-delay=".5s" id="logo2" src="../../public/assets/logo_bk200.jpg" alt="Logo" style="width:5em"></a>
+            <h1 class="wow fadeIn" data-wow-delay=".5s" >Smart choice! Welcome to join Booktown!</h1>
+     </div>
+            <form action="/user/signup" class="server-form" method="post" id="static-form">
+                <h1 >Sign up today!</h1>
+                <div class="form-group half-form">
+                    <label for="firstname" style="font-weight: normal;">First Name</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" value="{{firstname}}">
+                </div>
+                <div class="form-group half-form">
+                    <label for="lastname" style="font-weight: normal;">Last Name</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" value="{{lastname}}">
+                </div>
+                <div class="form-group half-form">
+                    <label for="phonenumber" style="font-weight: normal;">Phone Number</label>
+                    <input type="text" class="form-control" id="phonenumber" name="phonenumber" placeholder="●●●●●●●●●●" value="{{phonenumber}}">
+                </div>
+                <div class="form-group half-form">
+                    <label for="email" style="font-weight: normal;">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="{{email}}">
+                </div>
+               
+                <div class="form-group half-form">
+                    <label for="pwd" style="font-weight: normal;">Password</label>
+                    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password" value="{{pwd}}">
+                </div>
+                <div class="form-group half-form">
+                    <label for="comfirm" style="font-weight: normal;">Re-password</label>
+                    <input type="password" class="form-control" id="comfirm" name="comfirm" placeholder="Comfirm password" value="{{comfirm}}">
+                </div>
+            
+                {{#if hasErrors }}
+                <div class="form-group">
+                    <ul class="error-list" style="padding-inline-start: 0px;">
+        
+                        <li style="list-style: none;">
+                        <p class="not-found">{{error}}</p>
+                        </li>
+                    </ul>
+                </div>
+                {{/if}}
+                <div class="form-group">
+                    <button type="submit" class="btn_signup">Submit</button>
+                </div>
+                <br>
+                 <div class="form-group" style="text-align:center;">
+                    <p>Already has account?</p> <a href="/user/login">Log in here</a>
+                </div>
+                
+            </form>
+     
+    </div>
+</section>
+
+
+ <script src="../../public/js/wow.js"></script>
+
+ <script>
+        new WOW().init();
+        const Form = document.getElementById("static-form");
+        Form.addEventListener("submit", event => {
+            
+        })
+</script>
+  

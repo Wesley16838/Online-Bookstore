@@ -1,0 +1,150 @@
+
+<div class="main-cart">
+    <nav style="background-color:#000; z-index: 9999">
+            <div class="left">
+                    <a href="../../homepage" ><img id="logo" src="../../public/assets/logo200.png" alt="Logo" ></a>
+                    <form action="/book/search" method="GET">
+                            <div class="form-group has-feedback has-search" style="margin-bottom:0px">
+                                <label for="keyword" style="display:none;"></label>
+                                <input type="search" id="keyword" name="keyword" class="form-control" placeholder="Search">
+                              <span style="top: 0px;" class="glyphicon glyphicon-search form-control-feedback"></span>
+                            </div>
+                    </form>
+            </div>
+
+            <div class="right">
+                    <ul>
+                            <li class="cart">
+                                    <span id="cart">{{cartTotal}}</span><a href="">Cart</a>
+                                
+                            </li>
+                            <li>
+                                    <a href="#"><span id="username">Hi {{firstName}}</span>Account</a>
+                                    <ul class="dropdown">
+                                            <li><a href="/user/dashboard">My account</a></li>
+                                            
+                                            <li><a href="../../../" onclick="delete_cookie()">Log out</a></li>
+                                             {{!-- <li><button onclick="delete_cookie()">Log Out</button></li> --}}
+                                    </ul>
+                            </li>
+
+                    </ul>
+            </div>
+    </nav>
+
+        <div class="cart-left">
+            <div class="left-top">
+                <div class="left-side">
+                    <img id="logo2" src="../../public/assets/logo_bk200@2x.png" alt="Logo" style="float: left;">
+                    <h1 class="cart-title">Your Shopping Cart</h1>
+                </div>
+                <div class="right-side">
+                    <a href="../../homepage">Continue Shopping</a>
+                </div>
+            </div>
+
+            <div class="left-item">
+                <ul style="padding-left: 0em;margin-bottom: 0px;">
+                    {{#if empty }}
+                    
+                       <li style="color:rgb(214, 0, 0)">Your cart is empty</li>
+                    
+                    {{/if}}
+                     {{#each books}}  
+                                <li class="item">
+                                    <div class="item-img">
+                                        <img src="{{bookImage}}" alt="book" style="width: 90%;display: block;">
+                                    </div>
+                                    <div class="item-column">
+                                        <h2 class="item-title" style="margin: 0;">Book Title</h2>
+                                        <h2>{{bookName}}</h2>
+                                        <form action="/user/cart/delete/{{_id}}" method="post">
+                                            <button class="cart-btn" type="submit">Remove</button>
+                                        </form>
+                                    </div>
+                                    <div class="item-qty">
+                                        <form action="/user/cart/update/{{_id}}" method="post">
+                                            <h2 class="item-title" style="margin: 0;">Quantity</h2>
+                                            <label for="quantity" style="font-weight: normal;display: none;"></label>
+                                            <input type="number" id="quantity" name="quantity" min="1" max="10" value="{{bookQuantity}}" style="width: 30%;margin: auto;">
+                                            <button class="cart-btn" type="submit">Update</button>
+                                        </form>
+                                    </div>
+                                    <div class="item-price">
+                                        <h2 class="item-title" style="margin: 0;">Price</h2>
+                                        <h2 style="margin-top: 3em;">{{bookPrice}}</h2>
+                                    </div>
+                                    <div class="item-total">
+                                        <h2 class="item-title" style="margin: 0;">Total</h2>
+                                        <h2 style="margin-top: 3em;">{{eachTotal}}</h2>
+                                    </div>
+                                    
+                                </li>
+                    {{/each}}
+                </ul>
+               
+                <h2 style="text-align: left;">Total: ${{bookTotal}}</h2>
+                <button onclick="removeAll()">Remove All books</button>
+            </div>
+        </div>
+        <div class="cart-right">
+            <h2 class="order-title">Order Summary</h2>
+           
+            <form class="cart-form" action="/user/add/order" method="POST">
+                <div class="form-group" style="margin-bottom: 0em;">
+                     <label for="shippingaddress" style="font-weight: bold;">Shipping Address</label>
+                        <select id="shippingaddress" class="form-control" name="shippingaddress">
+                            <option value="">Select address...</option>
+                            {{#each addresses}}  
+                            <option value="{{address}}, {{city}} {{state}}, {{zip}} {{country}}">{{address}}</option>
+                            {{/each}}  
+                        </select>
+                </div>
+                <a href="/user/dashboard" style="margin:1em 0em;text-decoration:none;" class="cart-btn">Create new address</a>
+                   
+
+                <div class="form-group" style="margin-bottom: 0em;">
+                     <label for="payment" style="font-weight: bold;">Payment Method</label>
+                        <select class="form-control" id="payment" name="paymentmethod">
+                            <option value="">Select Payment method...</option>
+                            {{#each payments}}  
+                            <option value="{{cardnumber}}">Visa ending in {{number}}</option>
+                            {{/each}}  
+                        </select>
+                </div>
+                <a href="/user/dashboard" style="margin:1em 0em;text-decoration:none;" class="cart-btn">Create new payment</a>  
+              
+                <button class="cart-btn" type="submit">Place your order</button>         
+                     
+                {{#if hasErrors}}
+                   <ul class="error-list" style="padding-inline-start: 0px;">
+        
+                        <li style="list-style: none;">
+                        <p class="not-found">{{error}}</p>
+                        </li>
+                    </ul>
+                {{/if}}
+            </form>
+        </div>
+</div>
+<script>
+
+    function delete_cookie() {
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "userid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        alert('You have been logged out!')
+        window.location = "../../../";
+        
+    }
+   function removeAll() {
+       $.ajax({
+            url: '../../user/cart/delete',
+            type: 'DELETE',
+            success: function(result) {
+                 location.reload();  
+            }
+        });
+       
+    }
+
+</script>

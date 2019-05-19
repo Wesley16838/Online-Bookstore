@@ -1,0 +1,146 @@
+<div class="home">
+        <nav>
+                <div class="left">
+                        <a href="./homepage"><img id="logo" src="../../public/assets/logo200.png" alt="Logo" style=""></a>
+                        <form action="/book/search" method="GET">
+                                <div class="form-group has-feedback has-search" style="margin-bottom:0px">
+                                        <label for="keyword" style="display:none;"></label>
+                                        <input type="search" id="keyword" name="keyword" class="form-control" placeholder="Search">
+                                <span style="top: 0px;" class="glyphicon glyphicon-search form-control-feedback"></span>
+                                </div>
+                        </form>
+                </div>
+
+                <div class="right">
+                        <ul>
+                                <li class="cart">
+                                        <span style="color:#b56006" id="cart">{{cartTotal}}</span><a href="/user/cart/{{userid}}">Cart</a>
+                                        {{!-- <ul class="dropdown">
+                                                <li id="current-cart"></li>
+                                        </ul> --}}
+                                </li>
+                                <li>
+                                        <a href=""><span id="username">Hi {{firstName}}</span>Account</a>
+                                        <ul class="dropdown">
+                                                <li><a href="/user/dashboard">My account</a></li>
+                                        
+                                                <li><a href="../../../" onclick="delete_cookie()">Log out</a></li>
+                                        </ul>
+                                </li>
+
+                        </ul>
+                </div>
+        </nav>
+
+        <div class="home-main">
+
+                <div class="slide1" style="display:flex">
+                <a href="/book/search?keyword=ice"><img class="wow fadeIn" data-wow-delay=".7s" src="../../public/assets/icegroup@2x.png" alt="ice and fire"></a>
+                </div>
+                <div class="slide21" style="display:flex">
+                <a href="/book/search?keyword=hunger"><img src="../../public/assets/hungergroup@2x.png" alt="hunger game"></a>
+                
+                </div>
+                <div class="slide31" style="display:flex">
+                <a href="/book/search?keyword=nightside"><img src="../../public/assets/nightgroup@2x.png" alt="nightside"></a>
+                </div>
+        </div>
+</div>
+
+
+<div>
+        <a href="#" class="scroll-down"><span style="display:none">a</span></a>
+</div>
+<div class="home-body">
+        <h1 class="wow fadeIn" id="best" style="font-size:1.5em">Best Sellers on Sale</h1>
+        <h2 class="wow fadeIn" style="color:#767676;">{{bookSeries}} SERIES</h2>
+        <div class="center wow fadeIn">
+                        {{#each book}}  
+                                <div class="slide2">
+                                        <a href="/book/{{_id}}">
+                                                <img src="{{bookImage}}" alt="book">
+                                                <div class="overlay">
+                                                        <div class="text">
+                                                                <p>{{bookName}}</p>
+                                                                <p>{{bookAuthor}}</p>
+                                                                <p class="book-price" style="font-weight:bold; font-size:.8em;">${{bookPrice}}</p>
+                                                        </div>
+                                                </div>
+                                        </a>
+                                </div>
+                        {{/each}}
+        </div>
+</div>
+<article class="wow fadeIn" style="padding-top:5em;">
+        <section class="left-wrap">
+                <div>
+                        <div style="width:100%; text-align:center;">
+                                <img src="../../public/assets/month@2x.png" alt="popular in month" >
+                        </div>
+                        <div class="intro" style="width:100%;">
+                                <a href="/book/{{_id}}" style="z-index: 1;">
+                                        <img src="{{book2.bookImage}}" alt="nightside">
+                                </a>
+                                <div style="margin-left: 1em; z-index: 1;">
+                                        <h2 class="book-title">{{book2.bookName}}</h2>
+                                        <p class="book-author">{{book2.bookAuthor}}</p>
+                                        <p>$<span class="book-price"> {{book2.bookPrice}}</span></p>
+                                </div>
+                        </div>
+                </div>
+               
+        </section>
+        <section class="right-wrap">
+                <ul>
+                        {{#each book1}}  
+                               <li>
+                                        <a href="/book/{{_id}}" class="detail-wrap">
+                                               
+                                                <img src="{{bookImage}}" alt="book" class="monthImg" >
+                                        </a>
+                                                <div style="display:inline-block;">
+                                                        <h2 class="book-title">{{bookName}}</h2>
+                                                        <p>{{bookAuthor}}</p>
+                                                        <p >$<span class="book-price"> {{bookPrice}}</span></p>
+
+                                                </div>
+                                               
+                                             
+                                      
+                               </li>      
+                        {{/each}}
+                </ul>
+                     
+        </section>
+</article>
+<!-- Footer -->
+<footer>
+
+  <!-- Copyright -->
+  
+   <div class="footer-body" style="margin-top: 5em;">
+      <div class="footer-heading">© 2018 Copyright: <span style="color:#fff;">BookTown</span></div> 
+    </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+<script src="../../public/js/wow.js"></script>
+
+<script>
+        new WOW().init();
+         function delete_cookie() {
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "userid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        alert('You have been logged out!')
+        window.location = "../../../";
+        
+    }
+        $(function() {
+                $('.scroll-down').click (function() {
+                        $('html, body').animate({scrollTop: $('.scroll-down').offset().top }, 1000,'swing');
+                        return false;
+                });
+        });
+       
+</script>
