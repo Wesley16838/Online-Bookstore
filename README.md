@@ -1,6 +1,6 @@
 # CS546 Group 2 Final Project
 > An online Bookstore with RESTful API using Node.js/Express and MongoDB. Features includes sign up, log in, Cart(add, remove, update and place order), Search books and display books in the page.
-This project cvoer securoty using JWT to authorize user's information. Amazing design and perfect error handle.
+This project cover securoty using JWT to authorize user's information. Amazing design and perfect error handle.
 
 ## Default User Credential 
 * Email: wesley16838@gmail.com
