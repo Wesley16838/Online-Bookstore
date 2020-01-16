@@ -21,7 +21,7 @@
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
     "fullpage.js": "^3.0.4",
-    "handlebars": "^4.0.5",
+    "handlebars": "^4.3.0",
     "jio": "^3.35.0",
     "jsonwebtoken": "^8.4.0",
     "mongodb": "^2.1.18",
