@@ -24,7 +24,7 @@
     "handlebars": "^4.0.5",
     "jio": "^3.35.0",
     "jsonwebtoken": "^8.4.0",
-    "mongodb": "^2.1.18",
+    "mongodb": "^3.1.13",
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
     "node-uuid": "^1.4.7",
